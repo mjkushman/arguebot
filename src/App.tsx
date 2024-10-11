@@ -52,8 +52,7 @@ function App() {
     setIsConnecting(true);
     const options = getOptions({ topic, model, voice }) as CreateAssistantDTO;
     try {
-      // vapi.start(options);
-      console.log('starting call with options:', topic, voice, model, options)
+      vapi.start(options);
     } catch (error) {
       console.log("trycatch error", error);
     }
