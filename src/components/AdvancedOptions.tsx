@@ -5,9 +5,10 @@ import { Button, Field, Fieldset, Label, Select } from "@headlessui/react";
 type Props = {
   setModel: Dispatch<SetStateAction<{ model: string; provider: string }>>;
   setVoice: Dispatch<SetStateAction<{ voiceId: string; provider: string }>>;
+  isConnected:boolean,
 };
 
-const AdvancedOptions = ({ setModel, setVoice }: Props) => {
+const AdvancedOptions = ({ setModel, setVoice, isConnected, }: Props) => {
   const handleModelChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedOption = e.target.selectedOptions[0];
     const provider = selectedOption.getAttribute("data-provider") || "openai";
@@ -28,16 +29,16 @@ const AdvancedOptions = ({ setModel, setVoice }: Props) => {
     <div className="flex flex-col">
       
 
-      <Button onClick={() => setHidden(!hidden)} className={"text-sm"}>
+      <Button disabled={isConnected} onClick={() => setHidden(!hidden)} className={"text-sm data-[disabled]:invisible transition ease-in-out duration-100"}>
         {hidden ? "Advanced options" : "Close advanced options"}
       </Button>
       
       
         <Fieldset
-          disabled={hidden}
-          className="flex flex-row data-[disabled]:invisible gap-4"
+          disabled={hidden || isConnected}
+          className="flex flex-row data-[disabled]:invisible gap-4 transition ease-in-out duration-100"
         >
-          <Field>
+          <Field className={"transition ease-in-out duration-100"}>
             <Label className={"mx-2 font-semibold"}>Language Model</Label>
             <Select onChange={handleModelChange} aria-label="Language Model">
               {Models.map((m) => (

@@ -52,6 +52,7 @@ function App() {
     setIsConnecting(true);
     const options = getOptions({ topic, model, voice }) as CreateAssistantDTO;
     try {
+      console.log("options: ", {voice, model, topic})
       vapi.start(options);
     } catch (error) {
       console.log("trycatch error", error);
@@ -69,12 +70,12 @@ function App() {
   );
   const [model, setModel] = useState(() => {
     const { model, provider } =
-      Models[Math.floor(Math.random() * Models.length)];
+      Models[0];
     return { model, provider };
   });
   const [voice, setVoice] = useState(() => {
     const { voiceId, provider } =
-      Voices[Math.floor(Math.random() * Voices.length)];
+      Voices[0];
     return { voiceId, provider };
   });
 
@@ -88,21 +89,24 @@ function App() {
             <h1 className="text-2xl">{topic}</h1>
           </div>
 
-
-          <TopicBtn setTopic={setTopic} />
+          <TopicBtn
+            setTopic={setTopic}
+            isConnected={isConnected}
+            stopCall={stopCall}
+          />
 
           <div className="m-8">
             {isConnected ? (
               <StopCallBtn stopCall={stopCall} />
             ) : (
               <StartCallBtn
-              isConnecting={isConnecting}
-              startCall={startCall}
-              stopCall={stopCall}
+                isConnecting={isConnecting}
+                startCall={startCall}
+                stopCall={stopCall}
               />
             )}
           </div>
-            <AdvancedOptions setModel={setModel} setVoice={setVoice} />
+          <AdvancedOptions setModel={setModel} setVoice={setVoice} isConnected={isConnected}/>
         </div>
       </div>
     </>
