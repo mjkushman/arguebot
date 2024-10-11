@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/components/aiprofile.tsx","./src/components/startcallbtn.tsx","./src/components/stopcallbtn.tsx","./src/components/topicbtn.tsx","./src/fixtures/topics.ts","./src/utils/assistantoptions.ts"],"version":"5.6.3"}
